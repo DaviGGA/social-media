@@ -24,6 +24,7 @@ async function onClickLogin(event) {
         return
     }
 
+    toastr.success("Login realizado com sucesso!");
     localStorage.setItem('jwt',jwt);
 }
 

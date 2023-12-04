@@ -1,0 +1,27 @@
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+.post-img {
+    width: inherit;
+    height: 400;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.num-likes {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.lateral-button {
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.lateral-button:hover {
+    background-color: #f2f2f2;
+    transition: .5s;
+}
