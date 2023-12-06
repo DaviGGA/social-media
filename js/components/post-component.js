@@ -6,7 +6,6 @@ function htmlToElem(html) {
   }
 
 function createPostDOM(divPosts, posts) {
-    console.log("Creating");
     for (let post of posts) {
         const postString = `
             <div class="card mt-3">
@@ -50,7 +49,6 @@ function createPostDOM(divPosts, posts) {
         `
 
         const postHTML = htmlToElem(postString);
-        console.log(postHTML)
         divPosts.appendChild(postHTML);      
     }
 }

@@ -1,4 +1,3 @@
-
 const token = localStorage.getItem('jwt');
 
 const api = axios.create({
@@ -6,6 +5,6 @@ const api = axios.create({
     headers: {'Authorization': `Bearer ${token}`}
 })
 
-export async function createProfile({name, surname}) {
-    return api.post('profile/', {name, surname});    
+export async function createProfile(data) {
+    return api.post('profile/', data);    
 }

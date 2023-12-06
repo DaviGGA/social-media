@@ -11,21 +11,32 @@ async function onClickLogin(event) {
     const password = document.getElementById('input-password').value;
 
     let jwt;
+    let profile;
     try {
         const response = await User.login({username,password});
         jwt = response.data.token;
-        
+        profile = response.data.user.profile;
     } catch (error) {
         const errorMessage = error.response.data.message;
         toastr.error(errorMessage);
- 
+
         console.log(error);
         
         return
     }
 
-    toastr.success("Login realizado com sucesso!");
     localStorage.setItem('jwt',jwt);
+
+    if(profile) {
+        setTimeout(() => {moveTo('main-page')},1500)
+        return 
+    }
+
+    setTimeout(() => {moveTo('create-profile')},1500);
+}
+
+function moveTo(page) {
+    window.location.href = `/pages/${page}.html`
 }
 
 // EVENTS

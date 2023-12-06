@@ -24,9 +24,15 @@ async function onClickCreateProfile(event) {
 
     const name = document.getElementById('input-name').value;
     const surname = document.getElementById('input-surname').value;
+    const profilePicture = inputFile.files[0];
+
+    const data = new FormData();
+    data.append('name', name);
+    data.append('surname', surname);
+    data.append('profilePicture', profilePicture);
 
     try {
-        const response = await Profile.createProfile({name, surname});
+        const response = await Profile.createProfile(data);
         
     } catch (error) {
         const errorMessage = error.response.data.message;
@@ -37,6 +43,11 @@ async function onClickCreateProfile(event) {
     }
 
     toastr.success("Perfil criado com sucesso!");
+    setTimeout(moveToMainPage,1500);
+}
+
+function moveToMainPage() {
+    window.location.href = '/pages/main-page.html'
 }
 
 async function onClickProfileImg() {
