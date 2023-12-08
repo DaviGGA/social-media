@@ -1,4 +1,6 @@
 const baseURL = window.baseURL;
+import * as Like from '../services/like-service.js';
+import { divPosts } from '../main-page.js';
 
 function htmlToElem(html) {
     let temp = document.createElement('template');
@@ -7,15 +9,17 @@ function htmlToElem(html) {
     return temp.content.firstChild;
   }
 
-function createPostDOM(divPosts, posts) {
+function createPostDOM(posts) {
 
     for (let post of posts) {
         const userFullName = post.profile.name + " " + post.profile.surname;
         const profilePicture = baseURL + 'profile-picture/' + post.profile.picture;
         const postImage = baseURL + 'post-image/' + post.image;
 
+        const heartIcon = post.userLiked ? 'bi bi-heart-fill me-1' : 'bi bi-heart me-1'
+
         const postString = `
-            <div class="card mt-3">
+            <div id="post-${post.id}" class="card mt-3">
                 <div class="card-body">
                     <div class="row border-bottom pb-2 justify-content-between">
                         <div class="col-6 d-flex align-items-center">
@@ -33,8 +37,8 @@ function createPostDOM(divPosts, posts) {
                     </div>
                     <div class="row mt-2 justify-content-between">
                         <div class="col-3">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-heart me-1"></i>
+                            <div id="like-button" data-postId = ${post.id} class="d-flex c-pointer align-items-center">
+                                <i id="heart-icon" data-postId = ${post.id} class="${heartIcon}"></i>
                             </div>
                         </div>
                         <div class="col-3 d-flex justify-content-end align-self-center">
@@ -43,7 +47,7 @@ function createPostDOM(divPosts, posts) {
                     </div>
                     <div class="row mt-2">
                         <div style="font-size: 14px;" class="col-12 d-flex">
-                            Liked by <div class="ms-1 fw-bold">0 people.</div> 
+                            Curtido por <div id="like-count" class="mx-1 fw-bold">${post.likes.length}</div> pessoas. 
                         </div>
                     </div>
                     <div class="row mt-2">
@@ -56,8 +60,54 @@ function createPostDOM(divPosts, posts) {
         `
 
         const postHTML = htmlToElem(postString);
+        
+        
+
         divPosts.appendChild(postHTML);      
     }
+
+    
+    const likeButtons = divPosts.querySelectorAll('#like-button');
+
+    for (let button of likeButtons) {
+        button.addEventListener("click", onCLickLikePost);
+    }
 }
+
+async function onCLickLikePost(event) {
+    const postId = parseInt(event.target.dataset.postid);
+
+    let liked;
+    try {
+        const response = await Like.likePost(postId);
+        liked = response.data.liked;
+    } catch (error) {
+        const errorMessage = error.response.data.message;
+        // toastr.error(errorMessage);      
+        console.log(error);
+    }
+
+    updateLikes(liked,postId);
+    
+}
+
+async function updateLikes(liked, postId) {
+    let divPostId = 'post-' + postId;
+
+    const posts = divPosts.childNodes;
+
+    for (let post of posts) {
+        if (post.id == divPostId) {
+            const likeCount = post.querySelector('#like-count');
+            likeCount.innerHTML = liked ? parseInt(likeCount.innerHTML) + 1 : parseInt(likeCount.innerHTML) - 1;
+
+            const heartIcon = post.querySelector('#heart-icon');
+           heartIcon.className = liked ? 'bi bi-heart-fill me-1' : 'bi bi-heart me-1';
+        }
+    }
+    
+    
+}
+
 
 export default createPostDOM;

@@ -3,3 +3,7 @@
     margin: 0 auto;
     margin-top: 4rem;
 }
+
+.c-pointer {
+    cursor: pointer;
+}

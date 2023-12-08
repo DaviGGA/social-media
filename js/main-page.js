@@ -3,7 +3,7 @@ import createPostDOM from "./components/post-component.js";
 import * as User from './services/user-service.js';
 import * as Post from './services/post-service.js';
 
-const divPosts = document.getElementById('div-posts');
+export const divPosts = document.getElementById('div-posts');
 const publishPost = document.getElementById('publish-post');
 
 let user;
@@ -73,7 +73,10 @@ async function setFeed() {
     }
 
     console.log(posts);
-    createPostDOM(divPosts,posts);
+    divPosts.innerHTML = '';
+    createPostDOM(posts);
+    
+
 }
 
 // EVENTS
