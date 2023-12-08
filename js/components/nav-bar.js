@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3002/';
+const baseURL = window.baseURL;
 
 function htmlToElem(html) {
     let temp = document.createElement('template');
@@ -11,7 +11,7 @@ function createNavBarDOM(user) {
     const divNavBar = document.getElementById('nav-bar'); 
 
     const userFullName = user.profile.name + " " + user.profile.surname;
-    const profilePicture = baseUrl + 'profile-picture/' + user.profile.picture
+    const profilePicture = baseURL + 'profile-picture/' + user.profile.picture
 
     const navBar = `
         <nav class="navbar row border-bottom">
