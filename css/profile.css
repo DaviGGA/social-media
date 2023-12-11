@@ -1,0 +1,10 @@
+.profile-picture-150 {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+}
+
+.profile-container {
+    width: 40%;
+    max-width: 40%;
+}
