@@ -15,12 +15,15 @@ function createNavBarDOM(user) {
 
     const navBar = `
         <nav class="navbar row border-bottom">
+            <div class="col-4">
+                <i onclick="window.location='main-page.html'" class="h4 ms-2 c-pointer bi bi-house"></i>
+                <i class="bi ms-2 h4 c-pointer bi-plus-square" data-bs-toggle="modal" data-bs-target="#create-post"></i>
+            </div>
             <div class="col-4"></div>
-            <div class="col-4"></div>
-            <div class="col-4 ">
+            <div class="col-4">
             <div class="d-flex ms-2 justify-content-end align-items-center me-4">
-                <img class="profile-img me-2" src="${profilePicture}" alt="" srcset="">
-                <div class="fw-bold">${userFullName}</div>
+                <img onclick="window.location='profile.html?profileId=${user.profile.id}'" class="profile-img c-pointer me-2" src="${profilePicture}" alt="" srcset="">
+                <div onclick="window.location='profile.html?profileId=${user.profile.id}'" class="fw-bold c-pointer">${userFullName}</div>
             </div>
             </div>
         </nav>

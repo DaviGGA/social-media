@@ -7,3 +7,9 @@
 .c-pointer {
     cursor: pointer;
 }
+
+.profile-img-40 {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}

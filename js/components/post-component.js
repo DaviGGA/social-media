@@ -7,13 +7,16 @@ function htmlToElem(html) {
     html = html.trim();
     temp.innerHTML = html;
     return temp.content.firstChild;
-  }
+}
 
 function createPostDOM(posts) {
 
     for (let post of posts) {
         const userFullName = post.profile.name + " " + post.profile.surname;
-        const profilePicture = baseURL + 'profile-picture/' + post.profile.picture;
+        
+        const profilePicture = post.profile.picture ? 
+        baseURL + 'profile-picture/' + post.profile.picture : '../imgs/blank-profile-picture.png'
+        
         const postImage = baseURL + 'post-image/' + post.image;
 
         const heartIcon = post.userLiked ? 'bi bi-heart-fill me-1' : 'bi bi-heart me-1'

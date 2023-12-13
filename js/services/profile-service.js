@@ -9,6 +9,7 @@ export async function createProfile(data) {
     return api.post('profile/', data);    
 }
 
-export async function getProfileByUserId(userId) {
-    return api.get(`profile/${userId}`);
+export async function getProfileById(profileId) {
+    return api.get(`profile/${profileId}`);
 }
+

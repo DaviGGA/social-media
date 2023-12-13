@@ -8,3 +8,15 @@
     width: 40%;
     max-width: 40%;
 }
+
+.post-image {
+    width: 300px;
+    height: 300px;
+}
+
+.post-container {
+    max-width: 608px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
