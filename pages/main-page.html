@@ -37,7 +37,7 @@ crossorigin="anonymous"
     </div>
 </body>
 
-<!-- Modal -->
+<!-- Modal create post -->
   <div class="modal fade" id="create-post" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -63,9 +63,24 @@ crossorigin="anonymous"
     </div>
   </div>
 
+<!-- Modal see post -->
+  <div class="modal modal-xl fade" id="see-post" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div id="body-post" class="modal-content">
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <script type="module" src="../js/services/base-url.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="module" src="../js/components/nav-bar.js"></script>
+<script type="module" src="../js/components/post-modal-component.js"></script>
 <script type="module" src="../js/components/post-component.js"></script>
 <script type="module" src="../js/main-page.js"></script>
 <script 

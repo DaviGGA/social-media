@@ -2,6 +2,7 @@ import * as User from './services/user-service.js';
 import * as Profile from './services/profile-service.js';
 import * as Post from './services/post-service.js';
 import createNavBarDOM from "./components/nav-bar.js";
+import openPost from './components/post-modal-component.js';
 
 
 let user;
@@ -14,6 +15,8 @@ const profilePicture = document.getElementById('profile-picture');
 const profileName = document.getElementById('profile-name');
 
 const postContainer = document.getElementById('post-container');
+
+const postModalBody = document.getElementById('body-post');
 
 start();
 
@@ -97,11 +100,29 @@ function setPosts(posts) {
         const postString = `<img data-postid="${post.id}" class="c-pointer post-image" data-bs-toggle="modal" data-bs-target="#see-post" src="${postImage}" alt="">`;
         const postHTML = htmlToElem(postString);
 
+        postHTML.addEventListener('click', onClickOpenPost)
+
         postContainer.appendChild(postHTML);
     })
 
     const postCount = document.getElementById('posts-count');
     postCount.innerHTML = `${posts.length} publicações`
+}
+
+async function onClickOpenPost(event) {
+    let postId = event.target.dataset.postid;
+
+    let response;
+
+    try {
+        response = await Post.getPostById(postId);
+    } catch (error) {
+        console.log(error);
+        return
+    }
+
+    const post = response.data;
+    openPost(post, postModalBody);
 }
 
 function htmlToElem(html) {

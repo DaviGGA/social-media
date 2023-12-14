@@ -1,6 +1,8 @@
 const baseURL = window.baseURL;
 import * as Like from '../services/like-service.js';
+import * as Post from '../services/post-service.js';
 import { divPosts } from '../main-page.js';
+import openPost from './post-modal-component.js';
 
 function htmlToElem(html) {
     let temp = document.createElement('template');
@@ -8,6 +10,8 @@ function htmlToElem(html) {
     temp.innerHTML = html;
     return temp.content.firstChild;
 }
+
+const postModalBody = document.getElementById('body-post');
 
 function createPostDOM(posts) {
 
@@ -39,10 +43,13 @@ function createPostDOM(posts) {
                         </div>
                     </div>
                     <div class="row mt-2 justify-content-between">
-                        <div class="col-3">
+                        <div class="d-flex align-items-center col-3">
                             <div id="like-button" data-postId = ${post.id} class="d-flex c-pointer align-items-center">
                                 <i id="heart-icon" data-postId = ${post.id} class="${heartIcon}"></i>
                             </div>
+                            <div id="comment-button" data-postId = ${post.id} data-bs-toggle="modal" data-bs-target="#see-post" class="d-flex c-pointer align-items-center">
+                            <i data-postId = ${post.id} class="bi bi-chat"></i>
+                        </div>
                         </div>
                         <div class="col-3 d-flex justify-content-end align-self-center">
                             <i class="bi bi-bookmark"></i>
@@ -71,10 +78,31 @@ function createPostDOM(posts) {
 
     
     const likeButtons = divPosts.querySelectorAll('#like-button');
-
     for (let button of likeButtons) {
         button.addEventListener("click", onCLickLikePost);
     }
+
+    const commentButtons = divPosts.querySelectorAll('#comment-button');
+    for (let button of commentButtons) {
+        button.addEventListener("click", onClickOpenPost)
+    }
+
+}
+
+async function onClickOpenPost(event) {
+    let postId = event.target.dataset.postid;
+
+    let response;
+
+    try {
+        response = await Post.getPostById(postId);
+    } catch (error) {
+        console.log(error);
+        return
+    }
+
+    const post = response.data;
+    openPost(post, postModalBody);
 }
 
 async function onCLickLikePost(event) {
