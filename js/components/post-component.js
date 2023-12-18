@@ -30,8 +30,8 @@ function createPostDOM(posts) {
                 <div class="card-body">
                     <div class="row border-bottom pb-2 justify-content-between">
                         <div class="col-6 d-flex align-items-center">
-                            <img class="profile-img me-2" src="${profilePicture}" alt="">
-                            <div class="fw-bold">${userFullName}</div>
+                            <img data-profileid="${post.profile.id}" id="post-profile-img" class="c-pointer profile-img me-2" src="${profilePicture}" alt="">
+                            <div data-profileid="${post.profile.id}" id="post-profile-name" class="c-pointer fw-bold">${userFullName}</div>
                         </div>
                         <div class="col-3 d-flex justify-content-end align-self-center">
                             <i class="bi bi-three-dots"></i>
@@ -87,6 +87,21 @@ function createPostDOM(posts) {
         button.addEventListener("click", onClickOpenPost)
     }
 
+    const profilePictures = divPosts.querySelectorAll('#post-profile-img');
+    for (let profilePicture of profilePictures) {
+        profilePicture.addEventListener("click", (event) => {
+            const profileId = event.target.dataset.profileid;
+            window.location.href = `profile.html?profileId=${profileId}`;
+        })
+    }
+
+    const profileNames = divPosts.querySelectorAll('#post-profile-name');
+    for (let profileName of profileNames) {
+        profileName.addEventListener("click", (event) => {
+            const profileId = event.target.dataset.profileid;
+            window.location.href = `profile.html?profileId=${profileId}`;
+        })
+    }
 }
 
 async function onClickOpenPost(event) {
