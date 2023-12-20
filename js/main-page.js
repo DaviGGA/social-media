@@ -72,6 +72,8 @@ async function setFeed() {
         console.log(error);
     }
 
+    console.log(posts);
+
     divPosts.innerHTML = '';
     createPostDOM(posts);
 }

@@ -12,10 +12,6 @@ export async function createComment(data) {
         response = await api.post('comment/', data);
     } catch (error) {
         const statusCode = error.response.status;
-        if (statusCode == 403) {
-            window.location.href = '/pages/sign-in.html'
-        }
-
         const errorMessage = error.response.data.message;
         console.log(error);
         return error;

@@ -44,7 +44,7 @@ function openPost(post,selector) {
                                 ${post.description}
                             </div>
                         </div>
-                        <div id="comments">
+                        <div id="comments-section">
                             ${getComments(post.comments)}          
                         </div>
                     </div>
@@ -111,7 +111,7 @@ async function onEnterComment(event) {
         let comments = await Comment.getPostComments(postId);
         comments = comments.data
         
-        const commentsDiv = document.querySelector('#comments');
+        const commentsDiv = document.querySelector('#comments-section');
         
         commentsDiv.innerHTML = '';
         commentsDiv.innerHTML = getComments(comments);
