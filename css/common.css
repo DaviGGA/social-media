@@ -13,3 +13,19 @@
     height: 40px;
     border-radius: 100%;
 }
+
+/* NAV BAR */
+
+.profile-select {
+    border: none;
+    border-left: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    border-radius: 4px;
+    
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}

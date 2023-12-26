@@ -3,6 +3,7 @@ import * as Profile from './services/profile-service.js';
 import * as Post from './services/post-service.js';
 import * as Follow from './services/follow-service.js';
 import createNavBarDOM from "./components/nav-bar.js";
+import createSearchProfileDOM  from "./components/search-profile-component.js";
 import openPost from './components/post-modal-component.js';
 
 
@@ -31,6 +32,7 @@ start();
 
 async function start() {
     await setUser();
+    createSearchProfileDOM();
     createNavBarDOM(user);
     getProfileFromURLParam();
     await setProfileData();

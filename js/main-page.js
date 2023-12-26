@@ -1,10 +1,12 @@
 import createNavBarDOM from "./components/nav-bar.js";
 import createPostDOM from "./components/post-component.js";
+import createSearchProfileDOM  from "./components/search-profile-component.js";
 import * as User from './services/user-service.js';
 import * as Post from './services/post-service.js';
 
 export const divPosts = document.getElementById('div-posts');
 const publishPost = document.getElementById('publish-post');
+
 
 let user;
 
@@ -17,6 +19,7 @@ async function start() {
     await setFeed();
     
     createNavBarDOM(user);
+    createSearchProfileDOM();
 }
 
 async function setUser() {
@@ -39,6 +42,8 @@ async function onClickPublishButton(event) {
 
     const description = document.getElementById('input-description').value;
     const postImage = document.getElementById('input-image').files[0];
+    
+    const closeButton = document.getElementById('create-post-close-modal')
 
     const data = new FormData();
     data.append('description', description);
@@ -55,7 +60,10 @@ async function onClickPublishButton(event) {
         return
     }
 
+    closeButton.click()
+
     await setFeed();
+
 }
 
 async function setFeed() {

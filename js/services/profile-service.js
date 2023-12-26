@@ -13,3 +13,7 @@ export async function getProfileById(profileId) {
     return api.get(`profile/${profileId}`);
 }
 
+export async function searchProfile(searchParam) {
+    return api.get(`profile/search/${searchParam}`);
+}
+
