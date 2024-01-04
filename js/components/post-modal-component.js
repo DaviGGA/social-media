@@ -13,6 +13,8 @@ let postModalBody;
 function openPost(post,selector) {
     postModalBody = selector;
 
+    console.log(post)
+
     const profilePicture = post.user.profile.picture ? 
     window.baseURL + 'profile-picture/' + post.user.profile.picture : '../imgs/blank-profile-picture.png';
 
@@ -102,8 +104,8 @@ async function onEnterComment(event) {
     const text = event.target.value;
     if (text === '') return;
 
-    if (event.key == 'Enter') {     
-        const postId = parseInt(event.target.dataset.postid);
+    if (event.key == 'Enter') {
+        const postId = parseInt(event.target.dataset.postid)
         const response = await Comment.createComment({text,postId})
 
         event.target.value = '';

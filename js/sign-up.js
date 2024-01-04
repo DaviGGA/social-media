@@ -10,6 +10,12 @@ async function onClickCreateUser(event) {
     const password = document.getElementById('input-password').value;
     const confirmPassword = document.getElementById('input-confirm-password').value;
 
+    const hasBlankFields = !username || !password || !confirmPassword
+    if (hasBlankFields) {
+        toastr.info("Não deixe nenhum campo vazio!")
+        return
+    }
+
     try {
         const response = await User.createUser({username,password,confirmPassword});
         
@@ -23,7 +29,7 @@ async function onClickCreateUser(event) {
     }
 
     toastr.success("Usuário criado com sucesso!");
-    
+   
     setTimeout(moveToLoginPage,3000);
 }
 

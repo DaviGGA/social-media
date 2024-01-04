@@ -23,17 +23,27 @@ function createNavBarDOM(user) {
             <div class="col-4">
 
             </div>
-            <div class="col-4">
+            <div class="d-flex align-items-center justify-content-end col-4">
             <div class="d-flex ms-2 justify-content-end align-items-center me-4">
                 <img onclick="window.location='profile.html?profileId=${user.profile.id}'" class="profile-img c-pointer me-2" src="${profilePicture}" alt="" srcset="">
                 <div onclick="window.location='profile.html?profileId=${user.profile.id}'" class="fw-bold c-pointer">${userFullName}</div>
             </div>
+            <div id="logout" class="mx-2 c-pointer">Sair</div>
             </div>
         </nav>
     `
 
     const navBarHTML = htmlToElem(navBar);
-    divNavBar.appendChild(navBarHTML);      
+
+    const logoutButton = navBarHTML.querySelector("#logout")
+
+    logoutButton.addEventListener("click", () => {
+        localStorage.removeItem("jwt")
+        window.location.href = "./sign-in.html"
+    })
+
+    divNavBar.appendChild(navBarHTML);
+    
 }
 
 
